@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace WpfApplication1
 {
     /// <summary>
@@ -23,6 +24,42 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void TodayTopPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+           
+        }
+
+        private void GameSchedule_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            GameScheduleWindow  gs= new GameScheduleWindow();
+            gs.Show();
+        }
+
+        private void TeamRank_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Player_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Referee_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Coach_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
