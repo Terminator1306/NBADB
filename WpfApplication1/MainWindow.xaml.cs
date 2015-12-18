@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace WpfApplication1
 {
     /// <summary>
@@ -32,7 +33,8 @@ namespace WpfApplication1
 
         private void GameSchedule_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            GameScheduleWindow  gs= new GameScheduleWindow();
+            gs.Show();
         }
 
         private void TeamRank_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

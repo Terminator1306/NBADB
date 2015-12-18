@@ -6,31 +6,38 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 namespace WpfApplication1
-{
+{ 
     class DBHelper
     {
+        public static string uid = "root";
+        public static string pwd = "8745928aa";
         private string connection_str;
-        public DBHelper(string dbname,string id ,string pwd)
+        public DBHelper(string dbname)
         {
             string ConnStr = String.Format("server='localhost';" +
                "port='3306';" +
                "UId={0};" +
-               "Password={1};", id, pwd);
+               "Password={1};", uid, pwd);
             MySqlConnection conn = new MySqlConnection(ConnStr);
             conn.Open();
             string sql = String.Format("select count(*) from information_schema.SCHEMATA WHERE SCHEMA_NAME='{0}'", dbname);
             MySqlCommand command = new MySqlCommand(sql, conn);
             int n = int.Parse(command.ExecuteScalar().ToString());
-            if(n==0)
-            {
-                initDB();
-            }
             conn.Close();
-            connection_str=String.Format("server='localhost';" +
-                "Database={2}"+
+            connection_str = String.Format("server='localhost';" +
+                "Database={2};" +
                "port='3306';" +
                "UId={0};" +
-               "Password={1};", id, pwd,dbname);
+               "Password={1};", uid, pwd, dbname);
+            if(n==0)
+            {
+                sql = "create database if not exists " + dbname;
+                conn.Open();
+                command = new MySqlCommand(sql, conn);
+                command.ExecuteNonQuery();
+                conn.Close();
+                initDB();
+            }
         }
 
         private void initDB()
