@@ -14,7 +14,8 @@ namespace InitDataBase
                "server='localhost';" +
                "port='3306';" +
                "UId='root';" +
-               "Password='root';";
+               "Password='root';" +
+               "charset = 'utf8';";
         static void Main(string[] args)
         {
             createDB();
@@ -179,7 +180,8 @@ namespace InitDataBase
             string connstr = "data source='localhost';" +
                 "port='3306';" +
                 "user id='root';" +
-                "password='root';";
+                "password='root';" +
+               "charset = 'utf8';";
             string s = "create database if not exists nbadb";
             MySqlConnection conn = new MySqlConnection(connstr);
             MySqlCommand cmd = new MySqlCommand(s, conn);
