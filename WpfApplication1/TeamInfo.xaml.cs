@@ -15,6 +15,7 @@ using System.IO;
 using MySql.Data.MySqlClient;
 using MySql.Data;
 using System.Data;
+
 namespace WpfApplication1
 {
     /// <summary>
@@ -42,7 +43,7 @@ namespace WpfApplication1
             teamBox.DisplayMemberPath = "name";
             teamBox.SelectedValuePath = "teamid";
             teamBox.SelectedIndex = 0;
-
+            
             //DataSet dataSet = new DataSet();
             //String SQLStr = "select team.name as tn, mainCoach.name as cn, coaching.starttime, coaching.endtime " +
             //    "from team, mainCoach, coaching " +
@@ -86,6 +87,7 @@ namespace WpfApplication1
             DataSet infoSet = new DataSet();
             using (DataTable table = SQLInfoSet.Tables["BaseInfo"])
             {
+                //DateTime date;
                 infoSet.Tables.Add("BaseInfo");
                 infoSet.Tables["BaseInfo"].Columns.Add("key");
                 infoSet.Tables["BaseInfo"].Columns.Add("value");
@@ -103,10 +105,27 @@ namespace WpfApplication1
                 infoSet.Tables["BaseInfo"].Rows.Add(row);
                 row = infoSet.Tables["BaseInfo"].NewRow();
                 row["key"] = "建队日期";
+                //try
+                //{
+                //    date = DateTime.Parse(table.Rows[0]["founddate"].ToString());
+                //    row["value"] = date.ToString("yyyy-mm-dd");
+                //}
+                //catch (FormatException)
+                //{
+                //    row["value"] = table.Rows[0]["founddate"].ToString();
+                //}
                 row["value"] = table.Rows[0]["founddate"].ToString();
                 infoSet.Tables["BaseInfo"].Rows.Add(row);
                 row = infoSet.Tables["BaseInfo"].NewRow();
                 row["key"] = "解散日期";
+                //try
+                //{
+                //    date = DateTime.Parse(table.Rows[0]["disbanddate"].ToString());
+                //    row["value"] = date.ToString("yyyy-mm-dd");
+                //}
+                //catch(FormatException){
+                //    row["value"] = table.Rows[0]["disbanddate"].ToString();
+                //}
                 row["value"] = table.Rows[0]["disbanddate"].ToString();
                 infoSet.Tables["BaseInfo"].Rows.Add(row);
                 row = infoSet.Tables["BaseInfo"].NewRow();
@@ -151,6 +170,7 @@ namespace WpfApplication1
                 //table.Columns["position"].DataType = typeof(string);
                 foreach (DataRow row in table.Rows)
                 {
+                    //DateTime date;
                     int position = (int)row["position"];
                     String posStr;
                     switch (position)
@@ -175,6 +195,8 @@ namespace WpfApplication1
                             break;
                     }
                     row["posStr"] = posStr;
+
+                    
                 }
                 table.Columns.Remove("position");
                 table.Columns["posStr"].SetOrdinal(2);
