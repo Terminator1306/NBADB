@@ -49,7 +49,8 @@ namespace WpfApplication1
 
         private void Team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            TeamInfoWindow teamWindow = new TeamInfoWindow();
+            teamWindow.Show();
         }
 
         private void Referee_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -59,7 +60,8 @@ namespace WpfApplication1
 
         private void Coach_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            coachInfoWindow coachWindow = new coachInfoWindow();
+            coachWindow.Show();
         }
     }
 }
