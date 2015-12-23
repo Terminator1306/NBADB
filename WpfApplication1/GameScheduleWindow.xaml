@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WpfApplication1.GameScheduleWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="赛程" Height="367" Width="525" Loaded="Window_Loaded">
+        Title="赛程" Height="367" Width="525" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <ListView Name="list" Width="510" SelectionChanged="list_SelectionChanged">
             <ListView.View>
