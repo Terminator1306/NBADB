@@ -1,0 +1,10 @@
+﻿<Window x:Class="WpfApplication1.JudgeInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="裁判信息" Height="373" Width="427" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="请选择裁判：" HorizontalAlignment="Left" Height="26" Margin="35,10,0,0" VerticalAlignment="Top" Width="109"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="161,10,0,0" VerticalAlignment="Top" Width="162" SelectionChanged="ComboBox_SelectionChanged"/>
+
+    </Grid>
+</Window>
