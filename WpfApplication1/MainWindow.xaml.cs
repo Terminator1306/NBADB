@@ -55,7 +55,8 @@ namespace WpfApplication1
 
         private void Referee_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            JudgeInfoWindow judgeWindows = new JudgeInfoWindow();
+            judgeWindows.Show();
         }
 
         private void Coach_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

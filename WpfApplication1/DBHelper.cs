@@ -179,7 +179,7 @@ namespace WpfApplication1
                 "primary key(gameid, hometeamid, visitingteamid)" +
                 ")";
             exeSql(SQLStr);
-            SQLStr = "create table if not exists JuegeSchedule (" +
+            SQLStr = "create table if not exists JudgeSchedule (" +
                 "gameid int(10) not null, " +
                 "judgeid int(5) not null, " +
                 "primary key(gameid, judgeid)" +

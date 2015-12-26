@@ -75,13 +75,16 @@
     <Compile Include="coachInfoWindow.xaml.cs">
       <DependentUpon>coachInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JudgeInfoWindow.xaml.cs">
+      <DependentUpon>JudgeInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MatchDetail.xaml.cs">
       <DependentUpon>MatchDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Player.xaml.cs">
+    <Compile Include="player.xaml.cs">
       <DependentUpon>Player.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Playerselect.xaml.cs">
+    <Compile Include="playerselect.xaml.cs">
       <DependentUpon>Playerselect.xaml</DependentUpon>
     </Compile>
     <Compile Include="TeamInfo.xaml.cs">
@@ -101,6 +104,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="JudgeInfoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,24 +125,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MatchDetail.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Player.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Playerselect.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="TeamInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="TeamRank.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="TopPlayer.xaml">
       <Generator>MSBuild:Compile</Generator>

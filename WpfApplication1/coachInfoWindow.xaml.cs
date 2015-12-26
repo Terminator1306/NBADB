@@ -37,28 +37,34 @@ namespace WpfApplication1
             coachBox.DisplayMemberPath = "name";
             coachBox.SelectedValuePath = "coachid";
             coachBox.SelectedIndex = 0;
+
+            conn.Close();
         }
 
         private void coachBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MySqlConnection conn = dbHelper.getCon();
             int coachid = (int)coachBox.SelectedValue;
-            String SQLStr;
-            DataSet coachSet = new DataSet(); 
+            String SQLStr, dateSQL, dateSQL2;
+            DataSet coachSet = new DataSet();
+            dateSQL = "convert((select distinct birthday from mainCoach as t where t.birthday = mainCoach.birthday), char(12)) as birthday";
             SQLStr = String.Format(
-                "select mainCoach.name as cn, gender, birthday, picture " +
+                "select mainCoach.name as cn, gender, {1}, picture " +
                 "from mainCoach " +
                 "where " +
                     "mainCoach.coachid = {0}",
-                    coachid);
+                    coachid, dateSQL);
             MySqlDataAdapter coachAdapter = new MySqlDataAdapter(SQLStr, conn);
             coachAdapter.Fill(coachSet, "SQLBaseInfo");
+            dateSQL = "convert((select distinct starttime from coaching as t where t.starttime = coaching.starttime), char(12)) as starttime";
+            dateSQL2 = "convert((select distinct endtime from coaching as t where t.endtime = coaching.endtime), char(12)) as endtime";
             SQLStr = String.Format(
-                "select team.name as tn, coaching.starttime, coaching.endtime " +
+                "select team.name as tn, {1}, {2} " +
                 "from coaching, team " +
                 "where " + 
                     "coaching.coachid = {0} and " +
-                    "coaching.teamid = team.teamid ", coachid);
+                    "coaching.teamid = team.teamid ", 
+                    coachid, dateSQL, dateSQL2);
             coachAdapter = new MySqlDataAdapter(SQLStr, conn);
             coachAdapter.Fill(coachSet, "SQLCoachingInfo");
             coachSet.Tables.Add("CoachInfo");
@@ -77,7 +83,7 @@ namespace WpfApplication1
                 table.Rows.Add(row);
                 row = table.NewRow();
                 row["key"] = "生日";
-                row["value"] = coachSet.Tables["SQLBaseInfo"].Rows[0]["birthday"].ToString();
+                row["value"] = coachSet.Tables["SQLBaseInfo"].Rows[0]["birthday"];
                 table.Rows.Add(row);
 
                 String picStr = coachSet.Tables["SQLBaseInfo"].Rows[0]["picture"].ToString();
@@ -127,6 +133,8 @@ namespace WpfApplication1
             coachingGrid.DataContext = coachSet;
             coachingGrid.ItemsSource = coachSet.Tables["SQLCoachingInfo"].DefaultView;
             coachingGrid.IsReadOnly = true;
+
+            conn.Close();
         }
     }
 }
