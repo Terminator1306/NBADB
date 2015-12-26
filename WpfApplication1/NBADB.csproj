@@ -75,6 +75,9 @@
     <Compile Include="coachInfoWindow.xaml.cs">
       <DependentUpon>coachInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="JudgeInfoWindow.xaml.cs">
+      <DependentUpon>JudgeInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TeamInfo.xaml.cs">
       <DependentUpon>TeamInfo.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
     <Page Include="GameScheduleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JudgeInfoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
