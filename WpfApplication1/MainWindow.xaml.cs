@@ -39,12 +39,12 @@ namespace WpfApplication1
 
         private void TeamRank_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            new TeamRank().Show();
         }
 
         private void Player_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            new playerselect().Show();
         }
 
         private void Team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

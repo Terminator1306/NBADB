@@ -75,8 +75,20 @@
     <Compile Include="coachInfoWindow.xaml.cs">
       <DependentUpon>coachInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MatchDetail.xaml.cs">
+      <DependentUpon>MatchDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Player.xaml.cs">
+      <DependentUpon>Player.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Playerselect.xaml.cs">
+      <DependentUpon>Playerselect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TeamInfo.xaml.cs">
       <DependentUpon>TeamInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeamRank.xaml.cs">
+      <DependentUpon>TeamRank.xaml</DependentUpon>
     </Compile>
     <Compile Include="TopPlayer.xaml.cs">
       <DependentUpon>TopPlayer.xaml</DependentUpon>
@@ -105,9 +117,25 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MatchDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Player.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Playerselect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TeamInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TeamRank.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TopPlayer.xaml">
       <Generator>MSBuild:Compile</Generator>

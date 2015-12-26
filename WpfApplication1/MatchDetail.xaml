@@ -1,0 +1,20 @@
+﻿<Window x:Class="WpfApplication1.MatchDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="比赛详情" Height="500" Width="580">
+    <Grid>
+        <Image Name="home_p" HorizontalAlignment="Left" Height="104" Margin="10,22,0,0" VerticalAlignment="Top" Width="104"/>
+        <Image Name="visit_p" HorizontalAlignment="Left" Height="104" Margin="458,22,0,0" VerticalAlignment="Top" Width="104"/>
+        <Label Name="homescore" Content="homescore" HorizontalAlignment="Left" Height="34" Margin="188,65,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="71"/>
+        <Label Name="visitscore" Content="visitscore" HorizontalAlignment="Left" Height="34" Margin="316,65,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="71"/>
+        <Label Name="condition" Content="condition" HorizontalAlignment="Left" Height="26" Margin="255,100,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="73"/>
+        <DataGrid Name="home_d" HorizontalAlignment="Left" Height="118" Margin="10,156,0,0" VerticalAlignment="Top" Width="552" SelectionChanged="d_SelectionChanged" Loaded="home_d_Loaded"/>
+        <DataGrid Name="visit_d" HorizontalAlignment="Left" Height="118" Margin="10,322,0,0" VerticalAlignment="Top" Width="552" SelectionChanged="d_SelectionChanged" Loaded="visit_d_Loaded"/>
+        <Label x:Name="hometeam" Content="hometeam" HorizontalAlignment="Left" Height="34" Margin="189,31,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="71"/>
+        <Label x:Name="visitteam" Content="visitteam" HorizontalAlignment="Left" Height="34" Margin="316,31,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="71"/>
+        <Label Name="hometeam1" Content="Label" HorizontalAlignment="Left" Height="23" Margin="10,128,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label x:Name="visitteam1" Content="Label" HorizontalAlignment="Left" Height="23" Margin="10,293,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label Name="date" Content="Label" HorizontalAlignment="Left" Height="29" Margin="237,5,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="107"/>
+
+    </Grid>
+</Window>

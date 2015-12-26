@@ -15,11 +15,11 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="t_score" Grid.Row="0" Grid.Column="0"></DataGrid>
-                    <DataGrid Name="t_reb" Grid.Row="0" Grid.Column="1"></DataGrid>
-                    <DataGrid Name="t_assist" Grid.Row="0" Grid.Column="2"></DataGrid>
-                    <DataGrid Name="t_steal" Grid.Row="1" Grid.Column="0"></DataGrid>
-                    <DataGrid Name="t_block" Grid.Row="1" Grid.Column="1"></DataGrid>
+                    <DataGrid Name="t_score" Grid.Row="0" Grid.Column="0" Loaded="t_score_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="t_reb" Grid.Row="0" Grid.Column="1" Loaded="t_reb_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="t_assist" Grid.Row="0" Grid.Column="2" Loaded="t_assist_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="t_steal" Grid.Row="1" Grid.Column="0" Loaded="t_steal_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="t_block" Grid.Row="1" Grid.Column="1" Loaded="t_block_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Name="season" Header="赛季最佳">
@@ -37,11 +37,11 @@
                         <Label Content="选择赛季：" Margin="0,8,0,99"/>
                         <ComboBox Name="mseason" Width="130" Height="23" VerticalAlignment="Top" Margin="0,10,0,0" SelectionChanged="mseason_SelectionChanged"/>
                     </StackPanel>
-                    <DataGrid Name="s_score" Grid.Row="0" Grid.Column="1"></DataGrid>
-                    <DataGrid Name="s_reb" Grid.Row="0" Grid.Column="2"></DataGrid>
-                    <DataGrid Name="s_assist" Grid.Row="1" Grid.Column="0"></DataGrid>
-                    <DataGrid Name="s_steal" Grid.Row="1" Grid.Column="1"></DataGrid>
-                    <DataGrid Name="s_block" Grid.Row="1" Grid.Column="2"></DataGrid>
+                    <DataGrid Name="s_score" Grid.Row="0" Grid.Column="1" Loaded="s_score_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="s_reb" Grid.Row="0" Grid.Column="2" Loaded="s_reb_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="s_assist" Grid.Row="1" Grid.Column="0" Loaded="s_assist_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="s_steal" Grid.Row="1" Grid.Column="1" Loaded="s_steal_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="s_block" Grid.Row="1" Grid.Column="2" Loaded="s_block_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

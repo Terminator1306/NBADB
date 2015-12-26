@@ -196,7 +196,7 @@ namespace WpfApplication1
                     }
                     row["posStr"] = posStr;
 
-                    
+      
                 }
                 table.Columns.Remove("position");
                 table.Columns["posStr"].SetOrdinal(2);

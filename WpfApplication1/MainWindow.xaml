@@ -14,7 +14,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Label Name="GameSchedule" Grid.Column="0" Grid.Row="0" Margin="10" Content="比赛日程" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" MouseLeftButtonDown="GameSchedule_MouseLeftButtonDown" />
-        <Label Name="TeamRank" Grid.Column="1" Grid.Row="0" Margin="10" Content="分区排名" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" MouseLeftButtonDown="TeamRank_MouseLeftButtonDown"/>
+        <Label Name="TeamRank" Grid.Column="1" Grid.Row="0" Margin="10" Content="球队排名" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" MouseLeftButtonDown="TeamRank_MouseLeftButtonDown"/>
         <Label Name="Player" Grid.Column="2" Grid.Row="0" Margin="10" Content="球员信息" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" MouseLeftButtonDown="Player_MouseLeftButtonDown"/>
         <Label Name="Team" Grid.Column="0" Grid.Row="1" Margin="10" Content="球队信息" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" MouseLeftButtonDown="Team_MouseLeftButtonDown"/>
         <Label Name="Referee" Grid.Column="1" Grid.Row="1" Margin="10" Content="裁判信息" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" MouseLeftButtonDown="Referee_MouseLeftButtonDown"/>
