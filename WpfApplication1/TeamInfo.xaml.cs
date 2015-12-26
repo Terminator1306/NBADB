@@ -70,15 +70,18 @@ namespace WpfApplication1
             //initialize.
             MySqlConnection conn = dbHelper.getCon();
             int teamid = (int)teamBox.SelectedValue;
-            String SQLStr = String.Format(
-                "select team.name as tn, country, team.city, team.founddate, disbanddate, mainCoach.name as cn, squarename, mainCoach.picture " +
+            String SQLStr, dateSQL, dateSQL2;
+            dateSQL = "convert((select founddate from team as t where t.founddate = team.founddate), char(12)) as founddate";
+            dateSQL2 = "convert((select disbanddate from team as t where t.disbanddate = team.disbanddate), char(12)) as disbanddate";
+            SQLStr = String.Format(
+                "select team.name as tn, country, team.city, {1}, {2}, mainCoach.name as cn, squarename, mainCoach.picture " +
                 "from team, usedSquare, coaching, mainCoach " +
                 "where " +
                     "team.teamid = {0} and " +
                     "team.teamid = usedSquare.teamid and " +
                     "team.teamid = coaching.teamid and " +
                     "coaching.coachid = mainCoach.coachid ",
-                    teamid);
+                    teamid, dateSQL, dateSQL2);
             //MySqlCommand cmd = new MySqlCommand(SQLStr, conn);
             //获取球队基本信息
             MySqlDataAdapter infoAdapter = new MySqlDataAdapter(SQLStr, conn);
@@ -153,14 +156,20 @@ namespace WpfApplication1
             }
 
             //获取球队球员信息
+            String birthSQL = "convert((select distinct starttime from player as t " +
+                "where t.birthday = player.birthday), char(12)) as birthday";
+            dateSQL = "convert((select distinct starttime from playerbelongs as t " +
+                "where t.starttime = playerbelongs.starttime), char(12)) as starttime";
+            dateSQL2 = "convert((select distinct endtime from playerbelongs as t " +
+                "where t.endtime = playerbelongs.endtime), char(12)) as endtime";
             SQLStr = String.Format(
                 "select player.name, playerbelongs.number, position, " +
-                "birthday, height, weight, starttime, endtime " +
+                "{1}, height, weight, {2}, {3} " +
                 "from player, playerbelongs " +
                 "where " +
                     "playerbelongs.teamid = {0} and " +
                     "playerbelongs.playerid = player.playerid",
-                    teamid);
+                    teamid, birthSQL, dateSQL, dateSQL2);
             MySqlDataAdapter playerAdapter = new MySqlDataAdapter(SQLStr, conn);
             DataSet playerSet = new DataSet();
             playerAdapter.Fill(playerSet, "playerInfo");
