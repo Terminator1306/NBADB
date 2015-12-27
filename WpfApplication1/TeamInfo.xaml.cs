@@ -27,11 +27,12 @@ namespace WpfApplication1
         //private DataSet dataSet;
         //private MySqlDataAdapter adapter;
         private DBHelper dbHelper;
+        int teamid;
         public TeamInfoWindow()
         {
             InitializeComponent();
 
-            dbHelper = new DBHelper("nbadb2");
+            dbHelper = new DBHelper("nbadb");
             MySqlConnection conn = dbHelper.getCon();
 
             DataSet teamSet = new DataSet("teamSet");
@@ -69,10 +70,10 @@ namespace WpfApplication1
         {
             //initialize.
             MySqlConnection conn = dbHelper.getCon();
-            int teamid = (int)teamBox.SelectedValue;
+            teamid = (int)teamBox.SelectedValue;
             String SQLStr, dateSQL, dateSQL2;
-            dateSQL = "convert((select founddate from team as t where t.founddate = team.founddate), char(12)) as founddate";
-            dateSQL2 = "convert((select disbanddate from team as t where t.disbanddate = team.disbanddate), char(12)) as disbanddate";
+            dateSQL = "convert(founddate, char(12)) as founddate";
+            dateSQL2 = "convert(disbanddate, char(12)) as disbanddate";
             SQLStr = String.Format(
                 "select team.name as tn, country, team.city, {1}, {2}, mainCoach.name as cn, squarename, mainCoach.picture " +
                 "from team, usedSquare, coaching, mainCoach " +
@@ -108,27 +109,10 @@ namespace WpfApplication1
                 infoSet.Tables["BaseInfo"].Rows.Add(row);
                 row = infoSet.Tables["BaseInfo"].NewRow();
                 row["key"] = "建队日期";
-                //try
-                //{
-                //    date = DateTime.Parse(table.Rows[0]["founddate"].ToString());
-                //    row["value"] = date.ToString("yyyy-mm-dd");
-                //}
-                //catch (FormatException)
-                //{
-                //    row["value"] = table.Rows[0]["founddate"].ToString();
-                //}
                 row["value"] = table.Rows[0]["founddate"].ToString();
                 infoSet.Tables["BaseInfo"].Rows.Add(row);
                 row = infoSet.Tables["BaseInfo"].NewRow();
                 row["key"] = "解散日期";
-                //try
-                //{
-                //    date = DateTime.Parse(table.Rows[0]["disbanddate"].ToString());
-                //    row["value"] = date.ToString("yyyy-mm-dd");
-                //}
-                //catch(FormatException){
-                //    row["value"] = table.Rows[0]["disbanddate"].ToString();
-                //}
                 row["value"] = table.Rows[0]["disbanddate"].ToString();
                 infoSet.Tables["BaseInfo"].Rows.Add(row);
                 row = infoSet.Tables["BaseInfo"].NewRow();
@@ -144,24 +128,21 @@ namespace WpfApplication1
             baseInfoGrid.ItemsSource = infoSet.Tables[0].DefaultView;
             baseInfoGrid.IsReadOnly = true;
             String s = SQLInfoSet.Tables["BaseInfo"].Rows[0]["picture"].ToString();
-            if (!s.Equals("") && File.Exists(s))
+            try
             {
                 Uri uri = new Uri(s);
                 BitmapImage bitmap = new BitmapImage(uri);
                 coachImage.Source = bitmap;
             }
-            else
+            catch(Exception)
             {
                 coachImage.Source = null;
             }
 
             //获取球队球员信息
-            String birthSQL = "convert((select distinct starttime from player as t " +
-                "where t.birthday = player.birthday), char(12)) as birthday";
-            dateSQL = "convert((select distinct starttime from playerbelongs as t " +
-                "where t.starttime = playerbelongs.starttime), char(12)) as starttime";
-            dateSQL2 = "convert((select distinct endtime from playerbelongs as t " +
-                "where t.endtime = playerbelongs.endtime), char(12)) as endtime";
+            String birthSQL = "convert(birthday, char(12)) as birthday";
+            dateSQL = "convert(starttime, char(12)) as starttime";
+            dateSQL2 = "convert(endtime, char(12)) as endtime";
             SQLStr = String.Format(
                 "select player.name, playerbelongs.number, position, " +
                 "{1}, height, weight, {2}, {3} " +
@@ -171,9 +152,9 @@ namespace WpfApplication1
                     "playerbelongs.playerid = player.playerid",
                     teamid, birthSQL, dateSQL, dateSQL2);
             MySqlDataAdapter playerAdapter = new MySqlDataAdapter(SQLStr, conn);
-            DataSet playerSet = new DataSet();
-            playerAdapter.Fill(playerSet, "playerInfo");
-            using (DataTable table = playerSet.Tables["playerInfo"])
+            DataSet teamSet = new DataSet();
+            playerAdapter.Fill(teamSet, "playerInfo");
+            using (DataTable table = teamSet.Tables["playerInfo"])
             {
                 table.Columns.Add("posStr", typeof(string));
                 //table.Columns["position"].DataType = typeof(string);
@@ -218,9 +199,35 @@ namespace WpfApplication1
                 table.Columns["starttime"].ColumnName = "加入时间";
                 table.Columns["endtime"].ColumnName = "退出时间";
             }
-            teamGrid.DataContext = playerSet;
-            teamGrid.ItemsSource = playerSet.Tables["playerInfo"].DefaultView;
+            teamGrid.DataContext = teamSet;
+            teamGrid.ItemsSource = teamSet.Tables["playerInfo"].DefaultView;
             teamGrid.IsReadOnly = true;
+            //获取球场信息
+            SQLStr = String.Format(
+                "select name, city, capacity, setupdate, picture " +
+                "from square, usedsquare " +
+                "where teamid = {0} and squarename = name", teamid);
+            MySqlDataAdapter squareAdapter = new MySqlDataAdapter(SQLStr, conn);
+            DataSet squareSet = new DataSet();
+            squareAdapter.Fill(squareSet, "squareInfo");
+            using (DataTable table = squareSet.Tables["squareInfo"])
+            {
+                nameLabel.Content = table.Rows[0]["name"];
+                cityLabel.Content = table.Rows[0]["city"];
+                capacityLabel.Content = table.Rows[0]["capacity"];
+                setupdateLabel.Content = table.Rows[0]["setupdate"];
+                String picStr = table.Rows[0]["picture"].ToString();
+                try
+                {
+                    Uri uri = new Uri(picStr);
+                    BitmapImage bitmap = new BitmapImage(uri);
+                    squareImage.Source = bitmap;
+                }
+                catch(Exception)
+                {
+                    squareImage.Source = null;
+                }
+            }
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -228,5 +235,14 @@ namespace WpfApplication1
 
         }
 
+        private void uniformButton_Click(object sender, RoutedEventArgs e)
+        {
+            UniformWindow uniformWindow = new UniformWindow(teamid);
+            uniformWindow.Show();
+        }
+        private void baseInfoGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            baseInfoGrid.HeadersVisibility = DataGridHeadersVisibility.Row;
+        }
     }
 }

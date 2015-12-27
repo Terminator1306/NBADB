@@ -70,5 +70,11 @@ namespace WpfApplication1
         {
             new AddMatch().Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteGame deleteGame = new DeleteGame();
+            deleteGame.Show();
+        }
     }
 }

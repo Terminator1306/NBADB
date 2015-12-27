@@ -78,6 +78,9 @@
     <Compile Include="coachInfoWindow.xaml.cs">
       <DependentUpon>coachInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeleteGame.xaml.cs">
+      <DependentUpon>DeleteGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="JudgeInfoWindow.xaml.cs">
       <DependentUpon>JudgeInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -99,11 +102,18 @@
     <Compile Include="TopPlayer.xaml.cs">
       <DependentUpon>TopPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UniformWindow.xaml.cs">
+      <DependentUpon>UniformWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddMatch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="coachInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +164,10 @@
     <Page Include="TopPlayer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniformWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

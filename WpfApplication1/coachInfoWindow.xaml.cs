@@ -47,7 +47,7 @@ namespace WpfApplication1
             int coachid = (int)coachBox.SelectedValue;
             String SQLStr, dateSQL, dateSQL2;
             DataSet coachSet = new DataSet();
-            dateSQL = "convert((select distinct birthday from mainCoach as t where t.birthday = mainCoach.birthday), char(12)) as birthday";
+            dateSQL = "convert(birthday, char(12)) as birthday";
             SQLStr = String.Format(
                 "select mainCoach.name as cn, gender, {1}, picture " +
                 "from mainCoach " +
@@ -56,8 +56,8 @@ namespace WpfApplication1
                     coachid, dateSQL);
             MySqlDataAdapter coachAdapter = new MySqlDataAdapter(SQLStr, conn);
             coachAdapter.Fill(coachSet, "SQLBaseInfo");
-            dateSQL = "convert((select distinct starttime from coaching as t where t.starttime = coaching.starttime), char(12)) as starttime";
-            dateSQL2 = "convert((select distinct endtime from coaching as t where t.endtime = coaching.endtime), char(12)) as endtime";
+            dateSQL = "convert(starttime, char(12)) as starttime";
+            dateSQL2 = "convert(endtime, char(12)) as endtime";
             SQLStr = String.Format(
                 "select team.name as tn, {1}, {2} " +
                 "from coaching, team " +
@@ -85,15 +85,13 @@ namespace WpfApplication1
                 row["key"] = "生日";
                 row["value"] = coachSet.Tables["SQLBaseInfo"].Rows[0]["birthday"];
                 table.Rows.Add(row);
-
-                String picStr = coachSet.Tables["SQLBaseInfo"].Rows[0]["picture"].ToString();
-                if (!picStr.Equals("") && File.Exists(picStr))
-                {
+                try{
+                    String picStr = coachSet.Tables["SQLBaseInfo"].Rows[0]["picture"].ToString();
                     Uri uri = new Uri(picStr);
                     BitmapImage bitmap = new BitmapImage(uri);
                     coachImage.Source = bitmap;
                 }
-                else
+                catch(Exception)
                 {
                     coachImage.Source = null;
                 }
@@ -130,9 +128,11 @@ namespace WpfApplication1
             baseInfoGrid.DataContext = coachSet;
             baseInfoGrid.ItemsSource = coachSet.Tables["CoachInfo"].DefaultView;
             baseInfoGrid.IsReadOnly = true;
+            baseInfoGrid.HeadersVisibility = DataGridHeadersVisibility.Row;
             coachingGrid.DataContext = coachSet;
             coachingGrid.ItemsSource = coachSet.Tables["SQLCoachingInfo"].DefaultView;
             coachingGrid.IsReadOnly = true;
+
 
             conn.Close();
         }
