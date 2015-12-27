@@ -40,7 +40,11 @@ namespace WpfApplication1
 
         private void ok_Click(object sender, RoutedEventArgs e)
         {
-
+            create_game();
+            addGameSchedule();
+            addJudegeSchedule();
+            addPlayerData();
+             
         }
 
         private void hometeam_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -279,20 +283,35 @@ namespace WpfApplication1
             table.Columns.Add("id", Type.GetType("System.Int32"));
             table.Columns.Add("姓名", Type.GetType("System.String"));
             table.Columns.Add("首发", Type.GetType("System.Int32"));
+            table.Columns["首发"].DefaultValue = 0;
             table.Columns.Add("时间", Type.GetType("System.Int32"));
+            table.Columns["时间"].DefaultValue = 0;
             table.Columns.Add("2分出手", Type.GetType("System.Int32"));
+            table.Columns["2分出手"].DefaultValue = 0;
             table.Columns.Add("2分命中", Type.GetType("System.Int32"));
+            table.Columns["2分命中"].DefaultValue = 0;
             table.Columns.Add("3分出手", Type.GetType("System.Int32"));
+            table.Columns["3分出手"].DefaultValue = 0;
             table.Columns.Add("3分命中", Type.GetType("System.Int32"));
+            table.Columns["3分命中"].DefaultValue = 0;
             table.Columns.Add("罚球次数", Type.GetType("System.Int32"));
+            table.Columns["罚球次数"].DefaultValue = 0;
             table.Columns.Add("罚球命中", Type.GetType("System.Int32"));
+            table.Columns["罚球命中"].DefaultValue = 0;
             table.Columns.Add("失误", Type.GetType("System.Int32"));
+            table.Columns["失误"].DefaultValue = 0;
             table.Columns.Add("助攻", Type.GetType("System.Int32"));
+            table.Columns["助攻"].DefaultValue = 0;
             table.Columns.Add("前场篮板", Type.GetType("System.Int32"));
+            table.Columns["前场篮板"].DefaultValue = 0;
             table.Columns.Add("后场篮板", Type.GetType("System.Int32"));
+            table.Columns["后场篮板"].DefaultValue = 0;
             table.Columns.Add("盖帽", Type.GetType("System.Int32"));
+            table.Columns["盖帽"].DefaultValue = 0;
             table.Columns.Add("抢断", Type.GetType("System.Int32"));
+            table.Columns["抢断"].DefaultValue = 0;
             table.Columns.Add("犯规", Type.GetType("System.Int32"));
+            table.Columns["犯规"].DefaultValue = 0;
             DBHelper dbHelper = new DBHelper("nbadb");
             MySqlConnection conn = dbHelper.getCon();
             string sql = string.Format("select player.playerid,name from player,playerbelongs where player.playerid=playerbelongs.playerid and teamid={0}",homeid);
@@ -303,6 +322,7 @@ namespace WpfApplication1
             {
                 DataRow row;
                 row = table.NewRow();
+                row["id"] = mysqlread.GetInt32(0);
                 row["姓名"] = mysqlread.GetString(1);
                 table.Rows.Add(row);
             }
@@ -316,20 +336,35 @@ namespace WpfApplication1
             table.Columns.Add("id", Type.GetType("System.Int32"));
             table.Columns.Add("姓名", Type.GetType("System.String"));
             table.Columns.Add("首发", Type.GetType("System.Int32"));
+            table.Columns["首发"].DefaultValue = 0;
             table.Columns.Add("时间", Type.GetType("System.Int32"));
+            table.Columns["时间"].DefaultValue = 0;
             table.Columns.Add("2分出手", Type.GetType("System.Int32"));
+            table.Columns["2分出手"].DefaultValue = 0;
             table.Columns.Add("2分命中", Type.GetType("System.Int32"));
+            table.Columns["2分命中"].DefaultValue = 0;
             table.Columns.Add("3分出手", Type.GetType("System.Int32"));
+            table.Columns["3分出手"].DefaultValue = 0;
             table.Columns.Add("3分命中", Type.GetType("System.Int32"));
+            table.Columns["3分命中"].DefaultValue = 0;
             table.Columns.Add("罚球次数", Type.GetType("System.Int32"));
+            table.Columns["罚球次数"].DefaultValue = 0;
             table.Columns.Add("罚球命中", Type.GetType("System.Int32"));
+            table.Columns["罚球命中"].DefaultValue = 0;
             table.Columns.Add("失误", Type.GetType("System.Int32"));
+            table.Columns["失误"].DefaultValue = 0;
             table.Columns.Add("助攻", Type.GetType("System.Int32"));
+            table.Columns["助攻"].DefaultValue = 0;
             table.Columns.Add("前场篮板", Type.GetType("System.Int32"));
+            table.Columns["前场篮板"].DefaultValue = 0;
             table.Columns.Add("后场篮板", Type.GetType("System.Int32"));
+            table.Columns["后场篮板"].DefaultValue = 0;
             table.Columns.Add("盖帽", Type.GetType("System.Int32"));
+            table.Columns["盖帽"].DefaultValue = 0;
             table.Columns.Add("抢断", Type.GetType("System.Int32"));
+            table.Columns["抢断"].DefaultValue = 0;
             table.Columns.Add("犯规", Type.GetType("System.Int32"));
+            table.Columns["犯规"].DefaultValue = 0;
             DBHelper dbHelper = new DBHelper("nbadb");
             MySqlConnection conn = dbHelper.getCon();
             string sql = string.Format("select player.playerid,name from player,playerbelongs where player.playerid=playerbelongs.playerid and teamid={0}", visitid);
@@ -365,7 +400,7 @@ namespace WpfApplication1
             }
         }
     
-        private int create_game()
+        private void create_game()
         {
             int typeid =(int) type.SelectedValue;
             
@@ -377,7 +412,99 @@ namespace WpfApplication1
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
 
-            return 1;
+            sql = "select max(gameid) from game";
+            cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader mysqlread = cmd.ExecuteReader();
+            if(mysqlread.Read())
+            {
+                gameid = mysqlread.GetInt32(0);
+            }
+            conn.Close();
+        }
+
+        private void addGameSchedule()
+        {
+            string sql = string.Format("insert into gameschedule(gameid,hometeamid,visitingteamid) values({0},{1},{2})", gameid, homeid, visitid);
+            DBHelper dbHelper = new DBHelper("nbadb");
+            MySqlConnection conn = dbHelper.getCon();
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+            conn.Close(); 
+        }
+
+        private void addJudegeSchedule()
+        {
+            string sql = string.Format("insert into judgeschedule(gameid,judgeid) values({0},{1})", gameid, judgeid);
+            DBHelper dbHelper = new DBHelper("nbadb");
+            MySqlConnection conn = dbHelper.getCon();
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+            conn.Close(); 
+        }
+        
+        private void addPlayerData()
+        {
+            string sql;
+            DBHelper dbHelper = new DBHelper("nbadb");
+            MySqlConnection conn = dbHelper.getCon();
+            conn.Open();
+            for(int i=0;i<home_d.Items.Count-1;i++)
+            {
+                DataRowView drv=(DataRowView)home_d.Items[i];
+                int playerid = Int32.Parse(drv.Row["id"].ToString());
+                int first = Int32.Parse(drv.Row["首发"].ToString());
+                int time = Int32.Parse(drv.Row["时间"].ToString());
+                int num_2 = Int32.Parse(drv.Row["2分出手"].ToString());
+                int hit_2 = Int32.Parse(drv.Row["2分命中"].ToString());
+                int num_3 = Int32.Parse(drv.Row["3分出手"].ToString());
+                int hit_3 = Int32.Parse(drv.Row["3分命中"].ToString());
+                int num_1 = Int32.Parse(drv.Row["罚球次数"].ToString());
+                int hit_1 = Int32.Parse(drv.Row["罚球命中"].ToString());
+                int assist = Int32.Parse(drv.Row["助攻"].ToString());
+                int turnover = Int32.Parse(drv.Row["失误"].ToString());
+                int frontreb = Int32.Parse(drv.Row["前场篮板"].ToString());
+                int backreb = Int32.Parse(drv.Row["后场篮板"].ToString());
+                int block = Int32.Parse(drv.Row["盖帽"].ToString());
+                int steal = Int32.Parse(drv.Row["抢断"].ToString());
+                int foul = Int32.Parse(drv.Row["犯规"].ToString());
+                if(time>0)
+                {
+                    sql=string.Format("insert into playerdata values({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})",
+                        gameid,playerid,first,time,num_2,hit_2,num_3,hit_3,num_1,hit_1,turnover,assist,frontreb,backreb,block,steal,foul);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            for (int i = 0; i < visit_d.Items.Count - 1; i++)
+            {
+                DataRowView drv = (DataRowView)visit_d.Items[i];
+                int playerid = Int32.Parse(drv.Row["id"].ToString());
+                int first = Int32.Parse(drv.Row["首发"].ToString());
+                int time = Int32.Parse(drv.Row["时间"].ToString());
+                int num_2 = Int32.Parse(drv.Row["2分出手"].ToString());
+                int hit_2 = Int32.Parse(drv.Row["2分命中"].ToString());
+                int num_3 = Int32.Parse(drv.Row["3分出手"].ToString());
+                int hit_3 = Int32.Parse(drv.Row["3分命中"].ToString());
+                int num_1 = Int32.Parse(drv.Row["罚球次数"].ToString());
+                int hit_1 = Int32.Parse(drv.Row["罚球命中"].ToString());
+                int assist = Int32.Parse(drv.Row["助攻"].ToString());
+                int turnover = Int32.Parse(drv.Row["失误"].ToString());
+                int frontreb = Int32.Parse(drv.Row["前场篮板"].ToString());
+                int backreb = Int32.Parse(drv.Row["后场篮板"].ToString());
+                int block = Int32.Parse(drv.Row["盖帽"].ToString());
+                int steal = Int32.Parse(drv.Row["抢断"].ToString());
+                int foul = Int32.Parse(drv.Row["犯规"].ToString());
+                if (time > 0)
+                {
+                    sql = string.Format("insert into playerdata values({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16})",
+                        gameid, playerid, first, time, num_2, hit_2, num_3, hit_3, num_1, hit_1, turnover, assist, frontreb, backreb, block, steal, foul);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            conn.Close(); 
         }
     }
 }
