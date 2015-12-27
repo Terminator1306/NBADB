@@ -75,6 +75,12 @@
     <Compile Include="AddMatch.xaml.cs">
       <DependentUpon>AddMatch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="change.xaml.cs">
+      <DependentUpon>change.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="changelist.xaml.cs">
+      <DependentUpon>changelist.xaml</DependentUpon>
+    </Compile>
     <Compile Include="coachInfoWindow.xaml.cs">
       <DependentUpon>coachInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -86,6 +92,9 @@
     </Compile>
     <Compile Include="MatchDetail.xaml.cs">
       <DependentUpon>MatchDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modify.xaml.cs">
+      <DependentUpon>Modify.xaml</DependentUpon>
     </Compile>
     <Compile Include="player.xaml.cs">
       <DependentUpon>Player.xaml</DependentUpon>
@@ -106,6 +115,14 @@
       <DependentUpon>UniformWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AddMatch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="change.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="changelist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,6 +161,10 @@
     <Page Include="MatchDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modify.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Player.xaml">
       <Generator>MSBuild:Compile</Generator>

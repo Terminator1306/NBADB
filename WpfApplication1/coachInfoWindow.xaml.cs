@@ -25,7 +25,7 @@ namespace WpfApplication1
         public coachInfoWindow()
         {
             InitializeComponent();
-            dbHelper = new DBHelper("nbadb2");
+            dbHelper = new DBHelper("nbadb");
             MySqlConnection conn = dbHelper.getCon();
 
             DataSet coachSet = new DataSet();

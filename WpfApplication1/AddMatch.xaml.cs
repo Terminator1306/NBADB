@@ -44,6 +44,7 @@ namespace WpfApplication1
             addGameSchedule();
             addJudegeSchedule();
             addPlayerData();
+            Close();
         }
 
         private void hometeam_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -84,6 +85,11 @@ namespace WpfApplication1
                 }
                 inithome_d();
             }
+            if (home_d.Columns.Count() > 0)
+            {
+                home_d.Columns[0].Visibility = Visibility.Collapsed;
+                home_d.Columns[1].IsReadOnly = true;
+            }
         }
 
         private void visitteam_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -123,6 +129,11 @@ namespace WpfApplication1
                         visitteam.Content = mysqlread.GetString(1).ToString();
                 }
                 initvisit_d();
+            }
+            if (visit_d.Columns.Count() > 0)
+            {
+                visit_d.Columns[0].Visibility = Visibility.Collapsed;
+                visit_d.Columns[1].IsReadOnly = true;
             }
         }
 
@@ -382,24 +393,6 @@ namespace WpfApplication1
             visit_d.ItemsSource = table.DefaultView;
         }
 
-        private void home_d_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            if (home_d.Columns.Count() > 0)
-            {
-                home_d.Columns[0].Visibility = Visibility.Collapsed;
-                home_d.Columns[1].IsReadOnly = true;
-            }
-        }
-
-        private void visit_d_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            if (visit_d.Columns.Count() > 0)
-            {
-                visit_d.Columns[0].Visibility = Visibility.Collapsed;
-                home_d.Columns[1].IsReadOnly = true;
-            }
-        }
-    
         private void create_game()
         {
             int typeid =(int) type.SelectedValue;
@@ -506,5 +499,24 @@ namespace WpfApplication1
             }
             conn.Close(); 
         }
+
+        private void home_d_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (home_d.Columns.Count() > 0)
+            {
+                home_d.Columns[0].Visibility = Visibility.Collapsed;
+                home_d.Columns[1].IsReadOnly = true;
+            }
+        }
+
+        private void visit_d_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (visit_d.Columns.Count() > 0)
+            {
+                visit_d.Columns[0].Visibility = Visibility.Collapsed;
+                visit_d.Columns[1].IsReadOnly = true;
+            }
+        }
+
     }
 }

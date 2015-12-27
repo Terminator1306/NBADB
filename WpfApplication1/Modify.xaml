@@ -1,0 +1,11 @@
+﻿<Window x:Class="WpfApplication1.Modify"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="维护数据" Height="300" Width="300">
+    <Grid>
+        <Button Name="add" Content="添加赛程" HorizontalAlignment="Left" Height="38" Margin="86,38,0,0" VerticalAlignment="Top" Width="126" Click="add_Click"/>
+        <Button Name="modify" Content="修改赛程" HorizontalAlignment="Left" Height="38" Margin="86,120,0,0" VerticalAlignment="Top" Width="126" Click="modify_Click"/>
+        <Button Name="delete" Content="删除赛程" HorizontalAlignment="Left" Height="38" Margin="86,194,0,0" VerticalAlignment="Top" Width="126" Click="delete_Click"/>
+
+    </Grid>
+</Window>

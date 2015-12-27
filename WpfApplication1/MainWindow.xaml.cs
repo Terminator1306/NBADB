@@ -34,8 +34,7 @@ namespace WpfApplication1
 
         private void GameSchedule_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            GameScheduleWindow  gs= new GameScheduleWindow();
-            gs.Show();
+           new GameScheduleWindow().Show();
         }
 
         private void TeamRank_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -66,15 +65,9 @@ namespace WpfApplication1
             coachWindow.Show();
         }
 
-        private void add_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Modify_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            new AddMatch().Show();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            DeleteGame deleteGame = new DeleteGame();
-            deleteGame.Show();
+            new Modify().Show();
         }
     }
 }

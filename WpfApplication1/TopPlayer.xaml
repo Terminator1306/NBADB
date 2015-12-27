@@ -15,11 +15,15 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Name="t_score" Grid.Row="0" Grid.Column="0" Loaded="t_score_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
-                    <DataGrid Name="t_reb" Grid.Row="0" Grid.Column="1" Loaded="t_reb_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
-                    <DataGrid Name="t_assist" Grid.Row="0" Grid.Column="2" Loaded="t_assist_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
-                    <DataGrid Name="t_steal" Grid.Row="1" Grid.Column="0" Loaded="t_steal_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
-                    <DataGrid Name="t_block" Grid.Row="1" Grid.Column="1" Loaded="t_block_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                        <Label Content="日期：" Margin="0,8,0,99"/>
+                        <ComboBox Name="mdate" Width="130" Height="23" VerticalAlignment="Top" Margin="0,10,0,0" SelectionChanged="mdate_SelectionChanged"/>
+                    </StackPanel>
+                    <DataGrid Name="t_score" Grid.Row="0" Grid.Column="1" Loaded="t_score_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="t_reb" Grid.Row="0" Grid.Column="2" Loaded="t_reb_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="t_assist" Grid.Row="1" Grid.Column="0" Loaded="t_assist_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="t_steal" Grid.Row="1" Grid.Column="1" Loaded="t_steal_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
+                    <DataGrid Name="t_block" Grid.Row="1" Grid.Column="2" Loaded="t_block_Loaded" SelectionChanged="d_SelectionChanged"></DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Name="season" Header="赛季最佳">

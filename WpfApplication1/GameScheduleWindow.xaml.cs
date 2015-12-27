@@ -43,7 +43,7 @@ namespace WpfApplication1
             MySqlConnection conn = dbHelper.getCon();
 
             DataSet set = new DataSet();
-            string sql = string.Format("select distinct DATE_FORMAT(date,'%Y-%m-%d') as date from match_schedule");
+            string sql = string.Format("select distinct DATE_FORMAT(date,'%Y-%m-%d') as date from match_schedule order by date desc");
             MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
             adapter.Fill(set, "date");
             date_box.DataContext = set;

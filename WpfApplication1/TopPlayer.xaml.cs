@@ -28,8 +28,8 @@ namespace WpfApplication1
         {
             InitializeComponent();
             //date =DateTime.Now.ToShortDateString().ToString());
-            date = "2015-12-18";
-            s = 20152016;
+            //date = "2015-12-18";
+            //s = 20152016;
             initcomobox();
             inittoday();
         }
@@ -202,6 +202,7 @@ namespace WpfApplication1
         {
             DBHelper dbHelper = new DBHelper("nbadb");
             MySqlConnection conn = dbHelper.getCon();
+            MySqlConnection conn1 = dbHelper.getCon();
             DataSet set = new DataSet();
             MySqlDataAdapter adapter = new MySqlDataAdapter("select seasonid from season",conn);
             adapter.Fill(set, "season");
@@ -210,12 +211,31 @@ namespace WpfApplication1
             mseason.DisplayMemberPath = "seasonid";
             mseason.SelectedValuePath = "seasonid";
             mseason.SelectedIndex = 0;
+
+            set = new DataSet();
+            adapter = new MySqlDataAdapter("select distinct DATE_FORMAT(date,'%Y-%m-%d') as date from match_schedule order by date desc", conn);
+            adapter.Fill(set, "date");
+            mdate.DataContext = set;
+            mdate.ItemsSource = set.Tables["date"].DefaultView;
+            mdate.DisplayMemberPath = "date";
+            mdate.SelectedValuePath = "date";
+            mdate.SelectedIndex = 0;
         }
 
         private void mseason_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             s = (int)mseason.SelectedValue;
             initseason();
+            if (s_score.Columns.Count() > 0)
+                s_score.Columns[3].Visibility = Visibility.Collapsed;
+            if (s_reb.Columns.Count() > 0)
+                s_reb.Columns[3].Visibility = Visibility.Collapsed;
+            if (s_assist.Columns.Count() > 0)
+                s_assist.Columns[3].Visibility = Visibility.Collapsed;
+            if (s_steal.Columns.Count() > 0)
+                s_steal.Columns[3].Visibility = Visibility.Collapsed;
+            if (s_block.Columns.Count() > 0)
+                s_block.Columns[3].Visibility = Visibility.Collapsed;
         }
 
         private void t_block_Loaded(object sender, RoutedEventArgs e)
@@ -283,6 +303,22 @@ namespace WpfApplication1
                 new player(playerid).Show();
                 a.SelectedIndex = -1;
             }
+        }
+
+        private void mdate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            date = (string)mdate.SelectedValue.ToString();
+            inittoday();
+            if (t_score.Columns.Count() > 0)
+                t_score.Columns[3].Visibility = Visibility.Collapsed;
+            if (t_reb.Columns.Count() > 0)
+                t_reb.Columns[3].Visibility = Visibility.Collapsed;
+            if (t_assist.Columns.Count() > 0)
+                t_assist.Columns[3].Visibility = Visibility.Collapsed;
+            if (t_steal.Columns.Count() > 0)
+                t_steal.Columns[3].Visibility = Visibility.Collapsed;
+            if (t_block.Columns.Count() > 0)
+                t_block.Columns[3].Visibility = Visibility.Collapsed;
         }
 
        
