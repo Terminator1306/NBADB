@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WpfApplication1.TeamInfoWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="球队信息" Height="522" Width="636" WindowStartupLocation="CenterScreen">
+        Title="球队信息" Height="522" Width="680" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,2,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -9,25 +9,25 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="teamBox" HorizontalAlignment="Left" Height="23" Margin="134,10,0,0" VerticalAlignment="Top" Width="153" SelectionChanged="TeamSelect_SelectionChanged"/>
+        <ComboBox x:Name="teamBox" HorizontalAlignment="Left" Height="23" Margin="134,10,0,0" VerticalAlignment="Top" Width="196" SelectionChanged="TeamSelect_SelectionChanged"/>
         <Label Content="请选择球队：" HorizontalAlignment="Left" Height="23" Margin="23,10,0,0" VerticalAlignment="Top" Width="121"/>
         <DataGrid x:Name="teamGrid" Margin="10,213,10,10">
         </DataGrid>
-        <DataGrid x:Name="baseInfoGrid" HorizontalAlignment="Left" Height="160" Margin="134,38,0,0" VerticalAlignment="Top" Width="153"/>
+        <DataGrid x:Name="baseInfoGrid" Loaded="baseInfoGrid_Loaded" HorizontalAlignment="Left" Height="146" Margin="134,52,0,0" VerticalAlignment="Top" Width="196"/>
         <Label Content="主教练" HorizontalAlignment="Left" Height="27" Margin="10,171,0,0" VerticalAlignment="Top" Width="111" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Image x:Name="coachImage" HorizontalAlignment="Left" Height="123" Margin="10,43,0,0" VerticalAlignment="Top" Width="111"/>
-        <GroupBox x:Name="squareGroup" Header="球场与队服" HorizontalAlignment="Left" Height="184" Margin="303,10,0,0" VerticalAlignment="Top" Width="313">
-            <Button x:Name="uniformButton" Content="查看队服" HorizontalAlignment="Left" Height="24" Margin="10,129,0,0" VerticalAlignment="Top" Width="118" Click="uniformButton_Click"/>
+        <GroupBox x:Name="squareGroup" Header="球场与队服" HorizontalAlignment="Left" Height="188" Margin="344,12,0,0" VerticalAlignment="Top" Width="313">
+            <Button x:Name="uniformButton" Content="查看队服" HorizontalAlignment="Left" Height="24" Margin="10,127,0,0" VerticalAlignment="Top" Width="118" Click="uniformButton_Click"/>
         </GroupBox>
-        <Label Content="名称：" HorizontalAlignment="Left" Height="25" Margin="315,40,0,0" VerticalAlignment="Top" Width="41"/>
-        <Label Content="城市：" HorizontalAlignment="Left" Height="25" Margin="315,65,0,0" VerticalAlignment="Top" Width="41"/>
-        <Label Content="容纳量：" HorizontalAlignment="Left" Height="25" Margin="315,90,0,0" VerticalAlignment="Top" Width="67"/>
-        <Label Content="建造日期：" HorizontalAlignment="Left" Height="25" Margin="315,115,0,0" VerticalAlignment="Top" Width="67"/>
-        <Label x:Name="setupdateLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="382,115,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label x:Name="capacityLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="382,90,0,0" VerticalAlignment="Top" Width="67"/>
-        <Label x:Name="cityLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="361,65,0,0" VerticalAlignment="Top" Width="115"/>
-        <Label x:Name="nameLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="361,40,0,0" VerticalAlignment="Top" Width="115"/>
-        <Image x:Name="squareImage" HorizontalAlignment="Left" Height="123" Margin="481,43,0,0" VerticalAlignment="Top" Width="121"/>
+        <Label Content="名称：" HorizontalAlignment="Left" Height="25" Margin="356,42,0,0" VerticalAlignment="Top" Width="41"/>
+        <Label Content="城市：" HorizontalAlignment="Left" Height="25" Margin="356,67,0,0" VerticalAlignment="Top" Width="41"/>
+        <Label Content="容纳量：" HorizontalAlignment="Left" Height="25" Margin="356,92,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label Content="建造日期：" HorizontalAlignment="Left" Height="25" Margin="356,117,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label x:Name="setupdateLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="423,117,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="capacityLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="423,92,0,0" VerticalAlignment="Top" Width="67"/>
+        <Label x:Name="cityLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="402,67,0,0" VerticalAlignment="Top" Width="115"/>
+        <Label x:Name="nameLabel" Content="" HorizontalAlignment="Left" Height="25" Margin="402,42,0,0" VerticalAlignment="Top" Width="115"/>
+        <Image x:Name="squareImage" HorizontalAlignment="Left" Height="123" Margin="522,45,0,0" VerticalAlignment="Top" Width="121"/>
 
     </Grid>
 </Window>

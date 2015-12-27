@@ -69,5 +69,11 @@ namespace WpfApplication1
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteGame deleteGame = new DeleteGame();
+            deleteGame.Show();
+        }
     }
 }

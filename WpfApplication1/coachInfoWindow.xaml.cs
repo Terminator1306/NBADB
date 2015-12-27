@@ -128,9 +128,11 @@ namespace WpfApplication1
             baseInfoGrid.DataContext = coachSet;
             baseInfoGrid.ItemsSource = coachSet.Tables["CoachInfo"].DefaultView;
             baseInfoGrid.IsReadOnly = true;
+            baseInfoGrid.HeadersVisibility = DataGridHeadersVisibility.Row;
             coachingGrid.DataContext = coachSet;
             coachingGrid.ItemsSource = coachSet.Tables["SQLCoachingInfo"].DefaultView;
             coachingGrid.IsReadOnly = true;
+
 
             conn.Close();
         }

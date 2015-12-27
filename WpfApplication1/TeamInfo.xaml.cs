@@ -240,6 +240,9 @@ namespace WpfApplication1
             UniformWindow uniformWindow = new UniformWindow(teamid);
             uniformWindow.Show();
         }
-
+        private void baseInfoGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            baseInfoGrid.HeadersVisibility = DataGridHeadersVisibility.Row;
+        }
     }
 }
