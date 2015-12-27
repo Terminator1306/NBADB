@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddMatch.xaml.cs">
+      <DependentUpon>AddMatch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="coachInfoWindow.xaml.cs">
       <DependentUpon>coachInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
     <Compile Include="TopPlayer.xaml.cs">
       <DependentUpon>TopPlayer.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddMatch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="coachInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

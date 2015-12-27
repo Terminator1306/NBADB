@@ -20,29 +20,45 @@ namespace WpfApplication1
     /// </summary>
     public partial class GameScheduleWindow : Window
     {
-        private DateTime date;
+        private string date;
         public GameScheduleWindow()
         {
-            date = DateTime.Now;
             InitializeComponent();
-            initrank();
+            initbox();
         }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+          
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             
         }
+
+        private void initbox()
+        {
+            DBHelper dbHelper = new DBHelper("nbadb");
+            MySqlConnection conn = dbHelper.getCon();
+
+            DataSet set = new DataSet();
+            string sql = string.Format("select distinct DATE_FORMAT(date,'%Y-%m-%d') as date from match_schedule");
+            MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+            adapter.Fill(set, "date");
+            date_box.DataContext = set;
+            date_box.ItemsSource = set.Tables["date"].DefaultView;
+            date_box.DisplayMemberPath = "date";
+            date_box.SelectedValuePath = "date";
+            date_box.SelectedIndex = 0;
+        }
+
         private void initrank()
         {
             DBHelper dbhelper = new DBHelper("nbadb");
             MySqlConnection con = dbhelper.getCon();
             DataSet set = new DataSet();
-            string sql = String.Format("select gameid,hometeam,CONCAT(convert(homescore,CHAR(3)),':',convert(visitscore,char(3))) AS score , visitteam,progress,judgename,type from match_schedule ");
+            string sql = String.Format("select gameid,hometeam,CONCAT(convert(homescore,CHAR(3)),':',convert(visitscore,char(3))) AS score , visitteam,progress,judgename,type from match_schedule where date='{0}' ",date);
             MySqlDataAdapter adapter = new MySqlDataAdapter(sql, con);
             adapter.Fill(set, "rank");
             using (DataTable table = set.Tables["rank"])
@@ -124,7 +140,13 @@ namespace WpfApplication1
             }
         }
 
-        private void schedule_Loaded(object sender, RoutedEventArgs e)
+        private void date_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            date = (string)date_box.SelectedValue;
+            initrank();
+        }
+
+        private void schedule_LoadingRow(object sender, DataGridRowEventArgs e)
         {
             if (schedule.Columns.Count() > 0)
                 schedule.Columns[0].Visibility = Visibility.Collapsed;

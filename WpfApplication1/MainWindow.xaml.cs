@@ -24,6 +24,7 @@ namespace WpfApplication1
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void TodayTopPlayer_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -67,7 +68,7 @@ namespace WpfApplication1
 
         private void add_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            new AddMatch().Show();
         }
     }
 }

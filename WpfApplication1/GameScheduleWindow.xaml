@@ -3,8 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="赛程" Height="367" Width="525" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid Name="schedule" SelectionChanged="schedule_SelectionChanged" Loaded="schedule_Loaded">
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="19*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="比赛时间：" Margin="10,0,0,0" FontSize="23" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"> </Label>
+            <ComboBox Name="date_box" Height="30" Margin="10,0,0,0" Width="120" SelectionChanged="date_box_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+        <DataGrid Name="schedule" SelectionChanged="schedule_SelectionChanged" LoadingRow="schedule_LoadingRow" Grid.Row="1">
+
         </DataGrid>
     </Grid>
 </Window>
