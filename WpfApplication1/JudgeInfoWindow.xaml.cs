@@ -50,7 +50,7 @@ namespace WpfApplication1
             int judgeid = (int)judgeBox.SelectedValue;
             DataSet judgeSet = new DataSet();
             String SQLStr, dateSQL;
-            dateSQL = "convert((select distinct birthday from mainJudge as t where t.birthday = mainJudge.birthday), char(12)) as birthday";
+            dateSQL = "convert(birthday, char(12)) as birthday";
             SQLStr = String.Format(
                 "select mainJudge.name as jn, gender, {1}, picture " +
                 "from mainJudge " +
@@ -59,9 +59,9 @@ namespace WpfApplication1
                     judgeid, dateSQL);
             MySqlDataAdapter judgeAdapter = new MySqlDataAdapter(SQLStr, conn);
             judgeAdapter.Fill(judgeSet, "baseInfo");
-            dateSQL = "convert((select distinct date from game as t where t.date = game.date), char(12)) as date";
+            dateSQL = "convert(date, char(12)) as date";
             SQLStr = String.Format(
-                "select game.type, ht.name as htn, vt.name as vtn, {1}, gamecondition, progress " +
+                "select game.type, ht.name as htn, vt.name as vtn, {1}, progress " +
                 "from judgeschedule, game, gameschedule, team as ht, team as vt " +
                 "where " +
                     "judgeschedule.judgeid = {0} and " +
@@ -78,13 +78,12 @@ namespace WpfApplication1
             genderLabel.Content = (gender == 1) ? "男" : "女";
             birthdayLabel.Content = judgeSet.Tables["baseInfo"].Rows[0]["birthday"];
             String picStr = judgeSet.Tables["baseInfo"].Rows[0]["picture"].ToString();
-            if (!picStr.Equals("") && File.Exists(picStr))
-            {
+            try{
                 Uri uri = new Uri(picStr);
                 BitmapImage bitmap = new BitmapImage(uri);
                 judgeImage.Source = bitmap;
             }
-            else
+            catch(Exception)
             {
                 judgeImage.Source = null;
             }
@@ -92,11 +91,39 @@ namespace WpfApplication1
             using (DataTable table = judgeSet.Tables["gameInfo"])
             {
                 table.Columns.Add("比赛类型");
-                //table.Columns.Add("日期");
+                table.Columns.Add("比赛状态");
                 int typeInt;
+                int progressInt;
                 for (int i = 0; i < table.Rows.Count; i++)
                 {
                     typeInt = (int)table.Rows[i]["type"];
+                    progressInt = (int)table.Rows[i]["progress"];
+                    string p_str;
+                    switch (progressInt)
+                    {
+                        case 0:
+                            p_str = "未开始";
+                            break;
+                        case 1:
+                            p_str = "第一节";
+                            break;
+                        case 2:
+                            p_str = "第二节";
+                            break;
+                        case 3:
+                            p_str = "第三节";
+                            break;
+                        case 4:
+                            p_str = "第四节";
+                            break;
+                        case 5:
+                            p_str = "已结束";
+                            break;
+                        default:
+                            p_str = "未开始";
+                            break;
+                    }
+                    table.Rows[i]["比赛状态"] = p_str;
                     switch (typeInt)
                     {
                         case 1:
@@ -112,7 +139,6 @@ namespace WpfApplication1
                             table.Rows[i]["比赛类型"] = "季前赛";
                             break;
                     }
-                    //table.Rows[i]["日期"] = table.Rows[i]["date"].ToString().Substring(0,10);
                 }
                 table.Columns.Remove("type");
                 table.Columns["比赛类型"].SetOrdinal(0);
@@ -121,8 +147,8 @@ namespace WpfApplication1
                 //table.Columns.Remove("date");
                 //table.Columns["日期"].SetOrdinal(3);
                 table.Columns["date"].ColumnName = "日期";
-                table.Columns["gamecondition"].ColumnName = "比赛状态";
-                table.Columns["progress"].ColumnName = "比赛进度";
+                table.Columns.Remove("progress");
+                table.Columns["比赛状态"].SetOrdinal(4);
             }
             judgeInfoGrid.DataContext = judgeSet;
             judgeInfoGrid.ItemsSource = judgeSet.Tables["gameInfo"].DefaultView;

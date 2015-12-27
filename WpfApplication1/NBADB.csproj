@@ -96,6 +96,9 @@
     <Compile Include="TopPlayer.xaml.cs">
       <DependentUpon>TopPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UniformWindow.xaml.cs">
+      <DependentUpon>UniformWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="coachInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +150,10 @@
     <Page Include="TopPlayer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UniformWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
