@@ -44,7 +44,6 @@ namespace WpfApplication1
             addGameSchedule();
             addJudegeSchedule();
             addPlayerData();
-             
         }
 
         private void hometeam_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -210,7 +209,7 @@ namespace WpfApplication1
             process.ItemsSource = table.DefaultView;
             process.DisplayMemberPath = "text";
             process.SelectedValuePath = "value";
-            process.SelectedIndex = 0;
+            process.SelectedIndex = 5;
         }
         private void inithome_s()
         {
@@ -375,6 +374,7 @@ namespace WpfApplication1
             {
                 DataRow row;
                 row = table.NewRow();
+                row["id"] = mysqlread.GetInt32(0);
                 row["姓名"] = mysqlread.GetString(1);
                 table.Rows.Add(row);
             }
@@ -405,7 +405,7 @@ namespace WpfApplication1
             int typeid =(int) type.SelectedValue;
             
             DateTime dt=(DateTime)date.SelectedDate;
-            string sql = string.Format("insert into game(type,date,progress) values({0},{1},{2})", typeid, dt.ToString("yyyy-MM-dd"), processid);
+            string sql = string.Format("insert into game(type,date,progress) values({0},'{1}',{2})", typeid, dt.ToString("yyyy-MM-dd"), processid);
             DBHelper dbHelper = new DBHelper("nbadb");
             MySqlConnection conn = dbHelper.getCon();
             conn.Open();
