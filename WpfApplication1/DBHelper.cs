@@ -10,7 +10,7 @@ namespace WpfApplication1
     class DBHelper
     {
         public static string uid = "root";
-        public static string pwd = "8745928aa";
+        public static string pwd = "root";
         private string connection_str;
         public DBHelper(string dbname)
         {

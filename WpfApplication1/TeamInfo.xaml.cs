@@ -91,7 +91,9 @@ namespace WpfApplication1
             DataSet infoSet = new DataSet();
             using (DataTable table = SQLInfoSet.Tables["BaseInfo"])
             {
-                //DateTime date;
+                try
+                {
+                    //DateTime date;
                 infoSet.Tables.Add("BaseInfo");
                 infoSet.Tables["BaseInfo"].Columns.Add("key");
                 infoSet.Tables["BaseInfo"].Columns.Add("value");
@@ -123,13 +125,18 @@ namespace WpfApplication1
                 row["key"] = "球场";
                 row["value"] = table.Rows[0]["squarename"].ToString();
                 infoSet.Tables["BaseInfo"].Rows.Add(row);
+                }
+                catch (Exception)
+                {
+
+                }
             }
             baseInfoGrid.DataContext = infoSet;
             baseInfoGrid.ItemsSource = infoSet.Tables[0].DefaultView;
             baseInfoGrid.IsReadOnly = true;
-            String s = SQLInfoSet.Tables["BaseInfo"].Rows[0]["picture"].ToString();
             try
             {
+                String s = SQLInfoSet.Tables["BaseInfo"].Rows[0]["picture"].ToString();
                 Uri uri = new Uri(s);
                 BitmapImage bitmap = new BitmapImage(uri);
                 coachImage.Source = bitmap;
@@ -212,13 +219,13 @@ namespace WpfApplication1
             squareAdapter.Fill(squareSet, "squareInfo");
             using (DataTable table = squareSet.Tables["squareInfo"])
             {
-                nameLabel.Content = table.Rows[0]["name"];
-                cityLabel.Content = table.Rows[0]["city"];
-                capacityLabel.Content = table.Rows[0]["capacity"];
-                setupdateLabel.Content = table.Rows[0]["setupdate"];
-                String picStr = table.Rows[0]["picture"].ToString();
                 try
                 {
+                    nameLabel.Content = table.Rows[0]["name"];
+                    cityLabel.Content = table.Rows[0]["city"];
+                    capacityLabel.Content = table.Rows[0]["capacity"];
+                    setupdateLabel.Content = table.Rows[0]["setupdate"];
+                    String picStr = table.Rows[0]["picture"].ToString();
                     Uri uri = new Uri(picStr);
                     BitmapImage bitmap = new BitmapImage(uri);
                     squareImage.Source = bitmap;

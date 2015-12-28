@@ -71,7 +71,7 @@ namespace WpfApplication1
                         Uri uri = new Uri(photo_path);
                         BitmapImage bitmap = new BitmapImage(uri);
                         photo.Source = bitmap;
-                    }catch(Exception e)
+                    }catch(Exception)
                     {
                         
                     }

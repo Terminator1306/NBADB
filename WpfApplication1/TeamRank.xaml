@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WpfApplication1.TeamRank"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="球队排名" Height="367" Width="350">
+        Title="球队排名" Height="367" Width="350" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>

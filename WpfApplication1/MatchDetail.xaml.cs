@@ -102,7 +102,7 @@ namespace WpfApplication1
                         BitmapImage bitmap = new BitmapImage(uri);
                         home_p.Source = bitmap;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
 
                     }
@@ -123,7 +123,7 @@ namespace WpfApplication1
                         BitmapImage bitmap = new BitmapImage(uri);
                         visit_p.Source = bitmap;
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
 
                     }

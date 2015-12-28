@@ -1,7 +1,7 @@
 ﻿<Window x:Class="WpfApplication1.TopPlayer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="最佳球员" Height="367" Width="670">
+        Title="最佳球员" Height="367" Width="670" WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl Name="tabControl1" Margin="12" >
             <TabItem Name="today" Header="今日最佳">
